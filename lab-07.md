@@ -13,49 +13,35 @@ library(tidyverse)
 
 ``` r
 df <- tribble(
-  ~date, ~count1, ~count2,
-  "1/1/2020", 15,25,
-  "2/1/2020", 20,22,
-  "3/1/2020", 22,21,
-  "4/1/2020", 19,27,
-  "5/1/2020", 23,22, 
-  "6/1/2020", 25,29,
-  
-)
+  ~date, ~mask, ~nomask,
+  "7/12/2020", 26,9,
+  "7/13/2020", 20,9,
+  "7/14/2020", 20,9,
+  "7/15/2020", 20,9,
+  "7/16/2020", 20,9, 
+  "7/17/2020", 20,9,
+  "7/18/2020", 20,9,
+  "7/19/2020", 20,9,
+  "7/20/2020", 20,9,
+  "7/21/2020", 22,9,
+  "7/22/2020", 20,9,
+  "7/23/2020", 20,9,
+  "7/24/2020", 20,10,
+  "7/25/2020", 19,10,
+  "7/26/2020", 20,10,
+  "7/27/2020", 17,9,
+  "7/28/2020", 16,9,
+  "7/29/2020", 16,9,
+  "7/30/2020", 16,10,
+  "7/31/2020", 16,9,
+  "8/1/2020", 16,9,
+  "8/2/2020", 16,9,
+  )
 
-print(df)
-```
-
-    ## # A tibble: 6 x 3
-    ##   date     count1 count2
-    ##   <chr>     <dbl>  <dbl>
-    ## 1 1/1/2020     15     25
-    ## 2 2/1/2020     20     22
-    ## 3 3/1/2020     22     21
-    ## 4 4/1/2020     19     27
-    ## 5 5/1/2020     23     22
-    ## 6 6/1/2020     25     29
-
-``` r
-df %>%
-  ggplot(aes(x=date,y=count1, group=1))+
-  geom_line(color="blue") +
-  geom_line(aes(x=date,y=count2, group=1),color="red")+
-  labs(x="Date", y="count 1 & 2") 
-```
-
-![](lab-07_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
-
-## 3, 4
-
-the scale is really weired in given graph.
-
-## further Graph.
-
-``` r
-# chage date column  (character class into Date class)
 df$date<-as.Date(df$date, format="%m/%d/%Y")
+```
 
+``` r
 library(reshape2)
 ```
 
@@ -67,12 +53,23 @@ library(reshape2)
     ##     smiths
 
 ``` r
+#prepare for the plot
+
 df_melt<-melt(df, id.vars="date")
 
 df_melt %>%
   ggplot(aes(x=date,y=value, color=variable))+
   geom_line()+
-  scale_color_manual(values = c("red", "blue"))
+  scale_color_manual(values = c("red", "blue"))+
+  theme(axis.text.x=element_text(angle=70))
 ```
 
-![](lab-07_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](lab-07_files/figure-gfm/unnamed-chunk-2-1.png)<!-- --> \`\`\`
+
+## 3, 4
+
+the scale is really weired in given graph. in the original plot, the y
+scale does not make sence. In my plot, I make the same scale.
+
+It is hard to make that kind of inference because this data is not
+enough, and I think inference test is required to draw some conlcusion.
