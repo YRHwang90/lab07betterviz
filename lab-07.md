@@ -61,7 +61,8 @@ df_melt %>%
   ggplot(aes(x=date,y=value, color=variable))+
   geom_line()+
   scale_color_manual(values = c("red", "blue"))+
-  theme(axis.text.x=element_text(angle=70))
+  theme(axis.text.x=element_text(angle=70)) +
+  labs(title= "Kansas Covid-19 7-day rolling avearage of daily cases/per  100k population", subtitle="mask counties Vs. no-mask mandate counties", x= "date", y="number")
 ```
 
 ![](lab-07_files/figure-gfm/unnamed-chunk-2-1.png)<!-- --> \`\`\`
